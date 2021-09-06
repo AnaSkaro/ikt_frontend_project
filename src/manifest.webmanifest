@@ -3,39 +3,39 @@
     "short_name": "buyNow App",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#76B900",
+    "background_color": "#e7b3b5",
     "description": "der beste Foodblog!",
     "lang": "de-DE",
     "dir": "ltr",
     "orientation": "portrait-primary",
     "icons": [
         {
-            "src": "/src/assets/images/icons/chef48x48.png",
+            "src": "/assets/images/icons/chef48x48.png",
             "type": "image/png",
             "sizes": "48x48"
         },
         {
-            "src": "/src/assets/images/icons/chef72x72.png",
+            "src": "/assets/images/icons/chef72x72.png",
             "type": "image/png",
             "sizes": "72x72"
         },
         {
-            "src": "/src/assets/images/icons/chef96x96.png",
+            "src": "/assets/images/icons/chef96x96.png",
             "type": "image/png",
             "sizes": "96x96"
         },
         {
-            "src": "/src/assets/images/icons/chef128x128.png",
+            "src": "/assets/images/icons/chef128x128.png",
             "type": "image/png",
             "sizes": "128x128"
         },
         {
-            "src": "/src/assets/images/icons/chef256x256.png",
+            "src": "/assets/images/icons/chef256x256.png",
             "type": "image/png",
             "sizes": "256x256"
         },
         {
-            "src": "/src/assets/images/icons/chef484x484.png",
+            "src": "/assets/images/icons/chef484x484.png",
             "type": "image/png",
             "sizes": "484x484"
         }
