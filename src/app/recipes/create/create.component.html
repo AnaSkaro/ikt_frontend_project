@@ -1,1 +1,15 @@
-<link rel="manifest" href="../manifest.webmanifest">
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" [(ngModel)] = "post.title">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" name="description" placeholder="description"  [(ngModel)] = "post.description">
+    </div>
+    <div class="form-group">
+      <!-- <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx"> -->
+      <!-- <input type="file" (change)="onFileChanged($event)"> -->
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

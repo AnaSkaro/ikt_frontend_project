@@ -1,0 +1,15 @@
+<div class="container">
+    <div id="blog" class="row">
+       <div class="col-md-10 blogShort" *ngFor="let post of posts;index">
+          <h1>{{post.title}}</h1>
+          <img  src= "../../assets/1.webp" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+          <article>
+             <p>
+                {{post.description}}
+             </p>
+          </article>
+          <!-- <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">READ MORE</a>  -->
+       </div>
+       <div class="col-md-12 gap10"></div>
+    </div>
+ </div>

@@ -1,9 +1,23 @@
-<link rel="manifest" href="../manifest.webmanifest">
-<div class="card bg-dark text-white">
-    <img src="..." class="card-img" alt="...">
-    <div class="card-img-overlay">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text">Last updated 3 mins ago</p>
-    </div>
-  </div>
+<div class="container-fluid">
+  <a class="btn btn-primary" [routerLink]="['/create']" routerLinkActive="active">Create</a>
+</div>
+<table id="table" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let post of posts;">
+      <td>{{post.id}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.description}}</td>
+      <td><a [routerLink]="['/create/'+post.id]">Edit</a></td>
+      <td><a routerLink="/read" (click)="onDeletePost(post.id)" >delete</a></td>
+  </tr>
+  <tbody>
+  </tbody>
+</table>
