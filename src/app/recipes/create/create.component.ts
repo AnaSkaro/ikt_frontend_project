@@ -13,6 +13,7 @@ export class CreateComponent implements OnInit {
   post = {
     title:'',
     description:'',
+    image:""
   }
 
   constructor(private service: PostService,private route: ActivatedRoute) {  }
@@ -26,6 +27,16 @@ export class CreateComponent implements OnInit {
   onFileChanged(event:any) {
     this.selectedFile = event.target.files[0]
   }
+
+  handleUpload(event:any) {
+     const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        console.log(reader.result);
+        this.post.image = reader.result as string
+    };
+}
 
   getPostById(id:number){
     if(!id){
@@ -45,7 +56,8 @@ export class CreateComponent implements OnInit {
       alert("Post has been Added");
       this.post = {
         title:'',
-        description:''
+        description:'',
+        image:''
       }
     })
   }
