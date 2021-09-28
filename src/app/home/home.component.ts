@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
       console.log("connection is active")
       this.getAllPosts()
     } else {
-      this.service.getPosts().subscribe(result => this.posts = result.json());
+      this.localStorageService.readAll().then(res => this.posts = res)
     }
     this.subscription = timer(0, 60000).pipe(switchMap(async() => this.getAllPosts())).subscribe(result => console.log(result))
   }
