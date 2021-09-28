@@ -15,6 +15,8 @@ import { RouterModule } from '@angular/router';
 import { PostService } from './services/api.service';
 import { HomeComponent } from './home/home.component';
 import { LocalStorageService } from './services/local-storage.service';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { LocalStorageService } from './services/local-storage.service';
     UpdateComponent,
     DeleteComponent,
     HomeComponent,
+    ContactUsComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,12 +40,9 @@ import { LocalStorageService } from './services/local-storage.service';
       { path: '', component: HomeComponent },
       { path: 'create', component: CreateComponent },
       { path: 'create/:id', component: CreateComponent },
-      { path: 'update', component: UpdateComponent },
-      { path: 'update/:id', component: UpdateComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
       { path: 'read', component: ReadComponent },
-      { path: 'read/:id', component: ReadComponent },
-      { path: 'delete', component: DeleteComponent },
-      { path: 'delete/:id', component: DeleteComponent },
     ])
   ],
   providers: [PostService,LocalStorageService],
