@@ -28,27 +28,6 @@ export class LocalStorageService {
       }
     })
   }
-  addSinglePost(object: {
-    title: string;description: string;image: string
-  }) {
-    return new Promise(async(resolve, reject) => {
-      if(db != undefined) {
-        let index = await this.getLastIdfromIndexDB();
-        const request = await db.transaction(["receipeblog"], "readwrite").objectStore("receipeblog").add({
-          id: index,
-          title: object.title,
-          description: object.description,
-          image: object.image
-        }); //db.transaction([this.storageName],"readwrite").objectStore(this.storageName).put(value,keyName)
-        request.onsuccess = function(event: any) {
-          console.log("Prasad has been added to your database.");
-        };
-        request.onerror = function(event: any) {
-          console.log("Unable to add data\r\nPrasad is already exist in your database! ");
-        }
-      }
-    })
-  }
   //Read all posts from indexDB
   readAll() {
       return new Promise((resolve, reject) => {
@@ -70,23 +49,6 @@ export class LocalStorageService {
         };
       })
     }
-  //to get the last id of rows
-  getLastIdfromIndexDB() {
-    return new Promise((resolve, reject) => {
-      var objectStore = db.transaction("receipeblog").objectStore("receipeblog");
-      let ids: string[] = [];
-      objectStore.openCursor().onsuccess = function(event: any) {
-        let cursor = event.target.result;
-        if(cursor) {
-          ids.push(cursor.key)
-          cursor.continue();
-        } else {
-          let index = ids.length || 0;
-          resolve(index)
-        }
-      };
-    })
-  }
   delete(id: number) {
     return new Promise(async(resolve, reject) => {
       if(db != undefined) {

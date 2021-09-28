@@ -5,10 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { CreateComponent } from './recipes/create/create.component';
-import { ReadComponent } from './recipes/read/read.component';
-import { UpdateComponent } from './recipes/update/update.component';
-import { DeleteComponent } from './recipes/delete/delete.component';
+import { CreateComponent } from './recipes/Create,Update/create.component';
+import { ReadComponent } from './recipes/Read,Delete/read.component';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
@@ -25,8 +23,6 @@ import { AboutUsComponent } from './about-us/about-us.component';
     FooterComponent,
     CreateComponent,
     ReadComponent,
-    UpdateComponent,
-    DeleteComponent,
     HomeComponent,
     ContactUsComponent,
     AboutUsComponent,

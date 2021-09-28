@@ -26,10 +26,6 @@ export class CreateComponent implements OnInit {
     console.log(this.selectedId)
   }
 
-  onFileChanged(event:any) {
-    this.selectedFile = event.target.files[0]
-  }
-
   handleUpload(event:any) {
      const file = event.target.files[0];
     const reader = new FileReader();
@@ -69,27 +65,4 @@ export class CreateComponent implements OnInit {
       }
     })
   }
-
-
-  
-_arrayBufferToBase64( buffer:any ) {
-  var binary = '';
-  var bytes = new Uint8Array( buffer );
-  var len = bytes.byteLength;
-  for (var i = 0; i < len; i++) {
-      binary += String.fromCharCode( bytes[ i ] );
-  }
-  return window.btoa( binary );
-}
-
-blobToBase64(blob:any) {
-  return new Promise((resolve, _) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.readAsDataURL(blob);
-  });
-}
-
-
-
 }
