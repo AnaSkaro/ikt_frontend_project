@@ -18,11 +18,16 @@ export class PostService {
   }
 
   createPost(post:any){
+    if(post.id){
+      if(post.image == "")
+        delete post.image;
+      return this.http.put(this.url + '/'+ post.id,post);
+    }
     return this.http.post(this.url,post);
   }
- updatePost(post:any){
-    return this.http.put(this.url + '/'+ post.id,post);
-  }
+  updatePost(post:any){
+      return this.http.put(this.url + '/'+ post.id,post);
+    }
 
   onDeletePost(id:number){
     return this.http.delete(this.url + '/'+ id);

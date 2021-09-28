@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { PostService } from './services/api.service';
 import { HomeComponent } from './home/home.component';
+import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { HomeComponent } from './home/home.component';
       { path: 'delete/:id', component: DeleteComponent },
     ])
   ],
-  providers: [PostService],
+  providers: [PostService,LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

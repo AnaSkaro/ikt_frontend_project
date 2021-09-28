@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { PostService } from 'src/app/services/api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-read',
   templateUrl: './read.component.html',
@@ -9,17 +10,25 @@ import { PostService } from 'src/app/services/api.service';
 export class ReadComponent implements OnInit {
 
   posts:any;
-  constructor(private service: PostService) { }
+  constructor(private service: PostService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.getAllPosts()
   }
 
+  //delete post by id
   onDeletePost(id:number){
-    this.service.onDeletePost(id).subscribe(res => {
-      alert("Post has been deleted");
-      this.getAllPosts()
-    })
+    if(navigator.onLine){
+      this.service.onDeletePost(id).subscribe(res => {
+        this.localStorageService.delete(id) // deleting post from indexDB
+        alert("Post has been deleted");
+        this.getAllPosts()
+      },error => {
+        console.log(error);
+      })
+    }else{
+      alert("There is something wrong with your internet conenction");
+    }
   }
 
   getAllPosts(){
