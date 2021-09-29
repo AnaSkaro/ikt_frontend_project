@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -11,6 +12,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class CreateComponent implements OnInit {
   selectedId: number = 0;
   selectedFile: File | any
+  form: FormGroup;
   post = {
     id:0,
     title:'',
@@ -18,7 +20,16 @@ export class CreateComponent implements OnInit {
     image:""
   }
 
-  constructor(private service: PostService,private route: ActivatedRoute, private localStorageService: LocalStorageService) {  }
+  constructor(private service: PostService,private route: ActivatedRoute, private localStorageService: LocalStorageService,private _formBuilder: FormBuilder) { 
+    this.form = this._formBuilder.group(
+      {
+        id: ['', Validators.required],
+        title: ['', Validators.required],
+        description: ['', Validators.required],
+        image: ['', Validators.required],
+      },
+    );
+   }
 
   ngOnInit(): void {
     this.selectedId = Number(this.route.snapshot.paramMap.get('id'));
@@ -32,7 +43,9 @@ export class CreateComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => {
         console.log(reader.result);
-        this.post.image = reader.result as string
+        this.form.patchValue({
+          'image':reader.result as string
+        })
     };
 }
 
@@ -43,6 +56,11 @@ export class CreateComponent implements OnInit {
     this.service.getPostById(id).subscribe(res => {
       const {title, description,image} = res.json();
       console.log(res.json());
+      this.form.patchValue({
+        'id':id as number,
+        'title':title,
+        'description':description
+      })
       this.post.id = id as number;
       this.post.title = title;
       this.post.description = description;
@@ -50,6 +68,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit(){
+    this.post = {...this.form.value};
     this.service.createPost(this.post).subscribe(resp => {
       if(this.post && this.post.id){
         this.localStorageService.delete(this.post.id)

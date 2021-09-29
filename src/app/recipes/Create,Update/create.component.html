@@ -1,11 +1,11 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()"  [formGroup]="form">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" [(ngModel)] = "post.title">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" formControlName="title">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text" class="form-control" id="description" name="description" placeholder="description"  [(ngModel)] = "post.description">
+      <input type="text" class="form-control" id="description" name="description" placeholder="description"  formControlName="description">
     </div>
     <div class="form-group">
       <input type="file" (change)="handleUpload($event)">
