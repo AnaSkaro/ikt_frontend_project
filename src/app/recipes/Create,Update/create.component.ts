@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/api.service';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -15,18 +16,20 @@ export class CreateComponent implements OnInit {
   form: FormGroup;
   post = {
     id:0,
+    country:'',
     title:'',
     description:'',
     image:""
   }
 
-  constructor(private service: PostService,private route: ActivatedRoute, private localStorageService: LocalStorageService,private _formBuilder: FormBuilder) { 
+  constructor(private geolocation:GeolocationService,private service: PostService,private route: ActivatedRoute, private localStorageService: LocalStorageService,private _formBuilder: FormBuilder) { 
     this.form = this._formBuilder.group(
       {
-        id: ['', Validators.required],
-        title: ['', Validators.required],
-        description: ['', Validators.required],
-        image: ['', Validators.required],
+        id: [''],
+        country: ['Germany'],
+        title: [''],
+        description: [''],
+        image: [''],
       },
     );
    }
@@ -34,7 +37,15 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
     this.selectedId = Number(this.route.snapshot.paramMap.get('id'));
     this.getPostById(this.selectedId)
-    console.log(this.selectedId)
+
+
+    // this.geolocation.getCurrentLocation().subscribe(res => {
+    //   const {country} = res.json();
+    //   this.form.patchValue({
+    //     country:country
+    //   })
+    // })
+
   }
 
   handleUpload(event:any) {
@@ -54,10 +65,11 @@ export class CreateComponent implements OnInit {
       return;
     }
     this.service.getPostById(id).subscribe(res => {
-      const {title, description,image} = res.json();
+      const {title, description,image,country} = res.json();
       console.log(res.json());
       this.form.patchValue({
         'id':id as number,
+         country:country,
         'title':title,
         'description':description
       })
@@ -75,9 +87,11 @@ export class CreateComponent implements OnInit {
       }
       console.log(resp);
       alert("Post has been Added");
+      this.form.reset();
       //clear the forms
       this.post = {
         id:0,
+        country:'',
         title:'',
         description:'',
         image:''

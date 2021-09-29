@@ -6,6 +6,7 @@
     <tr>
       <th>Id</th>
       <th>Image</th>
+      <th>country</th>
       <th>Title</th>
       <th>Description</th>
       <th>Edit</th>
@@ -17,6 +18,7 @@
       <td class="w-25"> 
         <img [src]="post.image" alt="failed" class="img-fluid img-thumbnail" alt="Sheep">
       </td>
+      <td>{{post.country}}</td>
       <td>{{post.title}}</td>
       <td>{{post.description}}</td>
       <td><a [routerLink]="['/create/'+post.id]">Edit</a></td>
